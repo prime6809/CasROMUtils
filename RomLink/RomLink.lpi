@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="11"/>
+    <PathDelim Value="\"/>
+    <General>
+      <Flags>
+        <LRSInOutputDirectory Value="False"/>
+      </Flags>
+      <MainUnit Value="0"/>
+      <ActiveWindowIndexAtStart Value="-1"/>
+    </General>
+    <VersionInfo>
+      <Language Value=""/>
+      <CharSet Value=""/>
+    </VersionInfo>
+    <BuildModes Count="1">
+      <Item1 Name="default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+      <DestinationDirectory Value="$(TestDir)\publishedproject\"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <CommandLineParams Value="..\RomBuild\cfch2.txt ..\RomBuild\mcbd.rom ..\RomBuild\cfch2.rom -v $30"/>
+        <LaunchingApplication PathPlusParams="\usr\X11R6\bin\xterm -T 'Lazarus Run Output' -e $(LazarusDir)\tools\runwait.sh $(TargetCmdLine)"/>
+      </local>
+      <FormatVersion Value="2"/>
+      <Modes Count="1">
+        <Mode0 Name="default">
+          <local>
+            <CommandLineParams Value="..\RomBuild\cfch2.txt ..\RomBuild\mcbd.rom ..\RomBuild\cfch2.rom -v $30"/>
+            <LaunchingApplication PathPlusParams="\usr\X11R6\bin\xterm -T 'Lazarus Run Output' -e $(LazarusDir)\tools\runwait.sh $(TargetCmdLine)"/>
+          </local>
+        </Mode0>
+      </Modes>
+    </RunParams>
+    <RequiredPackages Count="2">
+      <Item1>
+        <PackageName Value="LCL"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="LCLBase"/>
+      </Item2>
+    </RequiredPackages>
+    <Units Count="14">
+      <Unit0>
+        <Filename Value="RomLink.pas"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="465"/>
+        <CursorPos Y="496"/>
+        <UsageCount Value="240"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="RomList.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1039"/>
+        <CursorPos X="9" Y="1061"/>
+        <UsageCount Value="120"/>
+        <Bookmarks Count="1">
+          <Item0 X="58" Y="779"/>
+        </Bookmarks>
+      </Unit1>
+      <Unit2>
+        <Filename Value="Utils.pas"/>
+        <TopLine Value="44"/>
+        <CursorPos X="10" Y="25"/>
+        <UsageCount Value="50"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="RamothMemoryStream.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="281"/>
+        <CursorPos X="35" Y="291"/>
+        <UsageCount Value="60"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="DragonCoCoCasUnit.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="344"/>
+        <CursorPos X="44" Y="360"/>
+        <UsageCount Value="52"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="RamothStringListUnit.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="35"/>
+        <CursorPos Y="56"/>
+        <UsageCount Value="44"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="..\CasLib\DragonCoCoCasUnit.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="26"/>
+        <CursorPos X="9" Y="47"/>
+        <UsageCount Value="101"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="..\Libs\RamothMemoryStream.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="317"/>
+        <CursorPos X="11" Y="327"/>
+        <UsageCount Value="100"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="..\Libs\RamothStringListUnit.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="44"/>
+        <CursorPos X="20" Y="72"/>
+        <UsageCount Value="11"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="..\CasLib\DragonCoCoCasNameBlockUnit.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="142"/>
+        <CursorPos X="35" Y="167"/>
+        <UsageCount Value="101"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="RLECompressUnit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="228"/>
+        <CursorPos X="27" Y="238"/>
+        <UsageCount Value="213"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="consoleutils.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ConsoleUtils"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="12"/>
+        <CursorPos X="12" Y="39"/>
+        <UsageCount Value="218"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="C:\lazarus\fpc\3.2.0\source\rtl\objpas\classes\classesh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1027"/>
+        <CursorPos X="14" Y="1049"/>
+        <UsageCount Value="10"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="..\Libs\ramothcustomapplicationunit.pas"/>
+        <UnitName Value="RamothCustomApplicationUnit"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="33"/>
+        <UsageCount Value="10"/>
+      </Unit13>
+    </Units>
+    <JumpHistory HistoryIndex="-1"/>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="11"/>
+    <PathDelim Value="\"/>
+    <Target>
+      <Filename Value="..\bin\RomLink.exe"/>
+    </Target>
+    <SearchPaths>
+      <OtherUnitFiles Value="..\Libs;..\CasLib"/>
+      <UnitOutputDirectory Value="..\units\lib\$(TargetCPU)-$(TargetOS)"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <UseAnsiStrings Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
+  </CompilerOptions>
+  <Debugging>
+    <Watches Count="3">
+      <Item1>
+        <Expression Value="LocalFileName"/>
+      </Item1>
+      <Item2>
+        <Expression Value="Up"/>
+      </Item2>
+      <Item3>
+        <Expression Value="Line"/>
+      </Item3>
+    </Watches>
+    <Exceptions Count="2">
+      <Item1>
+        <Name Value="ECodetoolError"/>
+      </Item1>
+      <Item2>
+        <Name Value="EFOpenError"/>
+      </Item2>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

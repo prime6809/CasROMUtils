@@ -1,0 +1,370 @@
+;
+; Control file for RomLink, 2017-08-07, P.harvey-Smith.
+;
+; The following file consists of groups of definitions for roms
+; Enclosed between BeginRom and EndRom lines to be loaded into 
+; the MegaRom, each definition consists of a group of at least 
+; 3 lines as follows :-
+;
+; Line 1:the type of file, ROM, CASBIN, CASBASD, CASBASC, BINIMG or MMCSNAP
+; Line 2:Text to appear in the menu
+; Line 3:filename & flags of file to load
+; Additional load lines may be specified along with several other line types. 
+;
+; Detailed documentation of line types.
+; Line 1 the file contains the type of the entry, valid values are :
+;	ROM	A standard cartridge rom, with a base address of $C000
+;	CASBIN	A binary cassette image.
+;	CASBASD	A Dragon basic cassette image, will be retokenized if running on a CoCo
+;	CASBASC A CoCo basic cassette image, will be retokenized if running on a Dragon
+;	BINIMG	A raw memory dump from an emulator
+;	MMCSNAP	A DragonMMC format snapshot file.
+;
+; Line 2 may contain any valid text (up to 28 characters) that will appear in the 
+; menu as a title for this item, typically the name of the software.
+;
+; Line 3 (and further load lines) will be in the following format :
+;	LOAD Path\filname,FileNo,LoadFlags.....
+;
+;	Path and filename can be any valid path / name under your OS.
+;	FileNo is only required for CASBIN, CASBASD, CASBASC, and specifies the
+;	file number within the virtual tape file, from 1..number of files on tape.
+;	Load flags may be one of :
+;		LOAD=<addr>	Set the load address of the file.
+;		END=<addr>	Set the end address of the file.
+;		EXEC=<addr>	Set the Exec address of the file.
+;		HS,HL,HE	For CASBIN files sets the Start, Length and Exec
+;				addresses from the file header respectively.
+;
+; Multiple load lines may be specified to for example load multiple files from a CAS
+; file.
+;
+; Note filenames containing spaces *ANYWHERE* withing the path *MUST*
+; be surrounded by double quotes, and any optional parameters should
+; be outside the quotes.
+;
+; A line starting with WRITE and followed by 3 comma seperated numbers may be used
+; to specify the area of memory to be written to the ROM. e.g. :
+; 
+; 	WRITE $1000, $2000, $1500 
+; would specify a start address of $1000, end address of $2000 and an EXEC address of $1500
+;
+; A FLAGS line may specify any of the following, comma seperated.
+;
+;    The flag NO, means don't execute the code to print 'OK' once the game 
+;    has loaded
+;    The flag NC, means don't save and restore the cassette buffer when
+;    loading the game from rom.
+;    The Flag DF, means disable the FIRQ generation in the CPLD.
+;
+; Each record can now have one or more patches listed at the end, these patches
+; are in the following formats :
+;
+; PATCH $HexAddr,$HexByte1,$HexByte2,$HexByteN
+; PATCH $HexAddr,"String in quotes"
+;
+; Note Strings *MUST* be in quotes, and numbers *MUST* be in hex preceeded by
+; a $ 
+;
+; The video mode can now be specified using the Settings for the VDG and SAM.
+;
+; VDGMODE $HexByte specifies a number $00..$07 that is the graphics mode to
+; program the VDG with, you can also specify the settings of the CSS and A/G bits
+; by supplying CSS and AG seperated by commas e.g. :
+; VDGMODE $07,CSS,AG
+;
+; SAMMODE specifies the graphics mode to program the SAM with $00..$07, this
+; need not be the same as the VDG mode.
+;
+; VIDBASE specifies the start address of the video RAM, this value will be divided 
+; by 512 and used to program the SAM video base.
+; 
+; STACK specifies the inital stack value. e.g.:
+; STACK $1200
+;
+; Comments within this file can bbe of the Windows batch file type ';'
+; or of the unix script/Makefile type '#'. Blank lines are also treated 
+; as comments.
+;
+;
+
+BeginConfig
+	RomSize=1024
+	Rom2Size=512
+	SplashFile=F:\Phill\SRC\PASCAL\RomLink\Ver1.8\RomBuild\cfch.bmp
+	Sort=1
+	Compress=1
+EndConfig
+
+BeginRom
+	CASBIN
+	Maurice Minor
+	LOAD g:\emulate\software\Dragon\tape\maurice-fixed.cas,1,HL,HS,EXEC=$66A0
+	STACK $7FFE
+EndRom
+
+BeginRom
+	CASBIN
+	Shock Trooper
+	LOAD "g:\emulate\software\dragon\tape\shock2.cas",5,LOAD=$1C00
+	LOAD "g:\emulate\software\dragon\tape\shock2.cas",6,LOAD=$1C00
+	WRITE $1C00,$7F00,$1C00
+EndRom
+
+BeginRom
+	CASBIN
+	Ugh!
+	LOAD z:\Retro\Dragon\From Chris Poacher\cas\Softek - Ugh! [exec].cas,1,HL,HS,HE
+EndRom
+	
+BeginRom
+	CASBIN
+	Screaming Abdabs
+	LOAD g:\emulate\software\Dragon\tape\ScreamingAbdabs.cas,1,HL,HS,HE
+EndRom
+
+BeginRom
+	CASBIN
+	Time Bandit
+	LOAD g:\emulate\software\Dragon\tape\exec\time_bandit_exec.cas,1,HL,HS,HE
+EndRom
+
+BeginRom
+	CASBIN
+	Touchstone
+	LOAD g:\emulate\software\Dragon\tape\exec\touchstone_exec.cas,1,HL,HS,HE
+EndRom
+
+BeginRom
+	CASBIN
+	Backtrak
+	LOAD g:\emulate\software\Dragon\tape\exec\bt_exec.cas,1,HL,HS,HE
+	STACK $1200
+EndRom
+
+BeginRom
+	ROM
+	Starship Chameleon
+	LOAD g:\emulate\software\dragon\cart\starship.rom
+EndRom
+
+BeginRom
+	ROM
+	Blockdown
+	LOAD g:\emulate\software\dragon\cart\blockdown.rom
+EndRom
+
+BeginRom
+	CASBIN
+	Blochead
+	LOAD g:\Emulate\software\Dragon\tape\DragonArchive\b\blochead.cas,2,LOAD=$2610,EXEC=$2610,END=$4000
+EndRom
+
+BeginRom
+	CASBIN
+	Aligata Invaders
+	LOAD g:\Emulate\software\Dragon\tape\DragonArchive\I\Invaders (198x)(Alligata)[!].cas,1,HL,HS,EXEC=$4E00
+	PATCH $4E13,$12,$12
+	FILL $0810,($47F0-$0810),$00
+EndRom
+
+BeginRom
+	CASBIN
+	Bonka
+	LOAD g:\Emulate\software\Dragon\tape\DragonArchive\B\bonka.cas,1,HL,HS,EXEC=$600
+EndRom
+
+BeginRom
+	CASBIN
+	Dungeon Raid
+	LOAD Z:\Retro\Dragon\From Chris Poacher\cas\Microdeal - Dungeon Raid [exec].cas,1,HL,HS,HE
+EndRom
+
+BeginRom
+	CASBIN
+	Ninja Warrior
+	LOAD Z:\Retro\Dragon\From Chris Poacher\cas\Programmers Guild - Ninja Warrior.cas,1,HL,HS,HE
+EndRom
+
+BeginRom
+	CASBIN
+	Spacewar
+	LOAD g:\Emulate\software\Dragon\tape\DragonArchive\S\space_wa.cas,1,HL,HS,HE
+EndRom
+
+
+BeginRom
+	; Patch capture of reset so that reset returns to cart
+	CASBIN
+	Cuthbert Goes Walkabout
+	LOAD g:\emulate\software\dragon\tape\cuthbert.cas,1,HS,HL
+	PATCH $317,$12,$12
+	FLAGS NC
+EndRom
+
+BeginRom
+	; Patch capture of reset so that reset returns to cart
+	CASBIN
+	Cuthbert in the Jungle
+	LOAD g:\emulate\software\dragon\tape\cuthbert_in_the_jungle.cas,2,LOAD=$400,EXEC=$4009,END=$40D8
+	PATCH $334E,$12,$12
+	PATCH $3353,$12,$12
+EndRom
+
+BeginRom
+	; Patch capture of reset so that reset returns to cart
+	CASBIN
+	Lunar Rover Patrol (new)
+	LOAD g:\Emulate\software\Dragon\tape\lunar-rover-patrol-exec.cas,1,HL,HS,HE
+
+	PATCH $2408,$12,$12
+EndRom
+
+BeginRom
+	; Patch capture of reset so that reset returns to cart
+	CASBIN
+	Buzzard Bait
+	LOAD "g:\emulate\software\dragon\tape\Microdeal - Buzzard Bait - No Dongle hacked.cas",2,HL,HS,HE
+	PATCH $4F88,$12,$12
+EndRom
+
+
+BeginRom
+	CASBIN
+	Devil Assault
+	LOAD g:\emulate\software\dragon\tape\devil_as.cas,1,HS,HL,HE
+	FLAGS NC
+EndRom
+
+BeginRom
+	CASBIN
+	Whirlybird Run
+	LOAD g:\emulate\software\dragon\tape\whirlybi.cas,1,HS,HL,HE
+	FLAGS NC
+EndRom
+
+BeginRom
+	CASBIN
+	Frogger
+	LOAD g:\emulate\software\dragon\tape\frogger.cas,1,HS,HL,HE
+	patch $0317,$12,$12
+	PATCH $4008,$12,$12
+	FLAGS NC
+EndRom
+
+BeginRom
+	CASBIN
+	Phantom Slayer
+	LOAD g:\emulate\software\dragon\tape\phantom_.cas,1,HS,HL,HE
+	PATCH $3DB3,$12,$12
+	PATCH $3DB8,$12,$12
+	FLAGS NC
+EndRom
+
+BeginRom
+	CASBIN
+	Galagon 
+	LOAD g:\emulate\software\dragon\tape\exec\galagon_exec.cas,1,HS,HL,HE
+EndRom
+
+BeginRom
+	CASBIN
+	Chuckie Egg
+	LOAD g:\emulate\software\dragon\tape\Chuckie_Egg.cas,1,HS,HE,HL
+	FLAGS NC,NO
+EndRom
+
+BeginRom
+	CASBIN
+	The King
+	LOAD g:\emulate\software\dragon\tape\te_king.cas,2,HS,HE,HL
+EndRom
+
+BeginRom
+	CASBIN
+	Manic Miner
+	LOAD g:\emulate\software\dragon\tape\manic_miner.cas,1,HL,HS,HE
+;	WRITE $150, $7AD6, $B400
+EndRom
+
+BeginRom
+; The patch line disables the check for a cart, that makes JSW 
+; over-write itself !
+	CASBIN
+	Jet Set Willy
+	LOAD G:\emulate\software\dragon\tape\JSW.cas,1,HL,HS
+	WRITE $02B0, $0, $ABA
+	PATCH $2CE0,$39
+	FLAGS NO
+EndRom
+
+BeginRom
+; Patch capture of reset so that reset returns to cart
+	CASBIN
+	Skramble
+	LOAD g:\emulate\software\dragon\tape\SKRAMBLE.cas,2,LOAD=$0400
+	WRITE $0400, $39D0, $1000
+	PATCH $1007,$12,$12
+EndRom
+
+BeginRom
+	CASBIN
+	Android Attack
+	LOAD g:\emulate\software\dragon\tape\android.cas,1,HL,HE,HS
+EndRom
+
+BeginRom
+; Patch capture of reset so that reset returns to cart
+	BINIMG
+	Rommel's Revenge
+	LOAD g:\emulate\software\dragon\MemDump\rrdisk.dmp,LOAD=$C00
+	WRITE $0c00, $4E65, $0c00
+;	PATCH $5CAD,$12,$12,$12
+	FLAGS NO
+EndRom
+
+BeginRom
+	CASBIN
+	Astro Blast
+	LOAD "g:\emulate\software\dragon\tape\Dragon Data Ltd - Astro Blast.cas",1,HL,HS,HE
+EndRom
+
+BeginRom
+	CASBIN
+	Moon Cresta
+	LOAD g:\emulate\software\dragon\tape\moon_cre.cas,2,LOAD=$600
+	WRITE $0600, $7D3C, $0600
+	PATCH $600,$B7,$FF,$C7,$B7,$FF,$C9,$86,$F8,$B7,$FF,$22,$B7,$FF,$C3,$B7,$FF,$C5,$B7,$FF,$C6,$7E,$24,$00
+	FLAGS NO
+	VIDBASE $0600
+	SAMMODE	$06
+	VDGMODE $07,AG,CSS
+EndRom
+
+BeginRom
+	CASBIN
+	Hunchback
+	LOAD g:\emulate\software\dragon\tape\HUNCHBAC.cas,2,HS
+	WRITE $0600, $7C00, $62C0
+	VIDBASE $0600
+	SAMMODE	$06
+	VDGMODE $00
+EndRom
+
+BeginRom
+	CASBASD
+	Star Trek
+	LOAD g:\emulate\software\dragon\tape\TREK.cas,1
+EndRom
+
+BeginRom
+	CASBIN
+	Protector
+	LOAD "g:\emulate\software\dragon\tape\Synapse Software - Protector.cas",1,HL,HE,HS
+EndRom
+
+BeginRom
+	CASBIN
+	3D Lunattack
+	LOAD "g:\emulate\software\dragon\tape\3D Lunattack (1984)(Hewson Consultants).cas",1,HL,HE,HS
+EndRom

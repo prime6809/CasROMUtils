@@ -1,0 +1,261 @@
+;
+; Control file for RomLink, 2010-06-04, P.harvey-Smith.
+;
+; The following file consists of groups of definitions for roms
+; to be loaded into the MegaRom, each definition consists of a
+; group of 6 lines as follows :-
+;
+; Line1:filename of rom or cas file
+; Line2:Text to appear in the menu
+; Line3:the type of file, ROM, CASBIN, CASBAS or BINIMG
+; Line4:the start / load  address in hex
+; Line5:the length in hex
+; Line6:the entry address in hex
+;
+; Each group of 6 lines + patches (see below) *MUST& be preceeded
+; by a line containing only 'BeginRom' and followed by a line containing
+; 'EndRom'
+;
+; Additionally if the filename in line 1 has the .cas extension,
+; then the following may also be specified, seperated by commas :-
+; a) The decimal cas file index, the number of the file within the cas
+;    to copy into the rom.
+; b) the flags HS, HL, HE these are HeadStart, HeadLength and HeadExec,
+;    and specify that the respective address should be copied from the
+;    cas file header, rather than using the values in this file, as 
+;    these can be specified individually, you can select any combination
+;    of file and header values.
+; c) The flag NO, means don't execute the code to print 'OK' once the game 
+;    has loaded
+; d) The flag NC, means don't save and restore the cassette buffer when
+;    loading the game from rom.
+;
+; Note filenames containing spaces *ANYWHERE* withing the path *MUST*
+; be surrounded by double quotes, and any optional parameters should
+; be outside the quotes.
+;
+; Comments within this file can bbe of the Windows batch file type ';'
+; or of the unix script/Makefile type '#'. Blank lines are also treated 
+; as comments.
+;
+; Each record can now have one or more patches listed at the end, these patches
+; are in the following formats :
+;
+; PATCH $HexAddr,$HexByte1,$HexByte2,$HexByteN
+; PATCH $HexAddr,"String in quotes"
+;
+; Note Strings *MUST* be in quotes, and numbers *MUST* be in hex preceeded by
+; a $ 
+;
+
+BeginConfig
+	RomSize=512
+	SplashFile=F:\Phill\SRC\PASCAL\RomLink\Ver1.3\rcmlogo2.raw
+EndConfig
+
+BeginRom
+	g:\emulate\software\dragon\cart\DragonData-CaveHunter.rom
+	Cave Hunter
+	rom
+	c000
+	2000
+	c000
+EndRom
+
+BeginRom
+	g:\emulate\software\dragon\cart\DragonData-CosmicInvaders.rom
+	Cosmic Invaders
+	rom
+	c000
+	2000
+	c000
+EndRom
+
+BeginRom
+	g:\emulate\software\dragon\cart\DragonData-CyrusChess.rom
+	Cyrus Chess
+	rom
+	c000
+	2000
+	c000
+EndRom
+
+BeginRom
+	g:\emulate\software\dragon\cart\DragonData-Metioroids.rom
+	Metioroids
+	rom
+	c000
+	2000
+	c000
+EndRom
+
+BeginRom
+	g:\emulate\software\dragon\cart\starship.rom
+	Starship Chameleon
+	rom
+	c000
+	2000
+	c000
+EndRom
+
+BeginRom
+	g:\emulate\software\dragon\cart\demo.rom
+	Dragon 32 Demo
+	rom
+	c000
+	2000
+	c000
+EndRom
+
+BeginRom
+	g:\emulate\software\dragon\tape\Chuckie_Egg.cas,1,HS,HE,HL,NC,NO
+	Chuckie Egg
+	CASBIN
+	0
+	0
+	0
+EndRom
+
+BeginRom
+	g:\emulate\software\dragon\tape\te_king.cas,2,HS,HE,HL
+	The King
+	CASBIN
+	0
+	0
+	0
+EndRom
+
+BeginRom
+	g:\emulate\software\dragon\tape\manic_miner.cas
+	Manic Miner
+	CASBIN
+	150
+	7986
+	B400
+EndRom
+
+BeginRom
+; The patch line disables the check for a cart, that makes JSW 
+; over-write itself !
+	G:\emulate\software\dragon\tape\JSW.cas,1,HL,HS
+	Jet Set Willy
+	CASBIN
+	0,2b0
+	0
+	aba
+	PATCH $2CE0,$39
+EndRom
+
+BeginRom
+; Patch capture of reset so that reset returns to cart
+	g:\emulate\software\dragon\tape\SKRAMBLE.cas,2,HL
+	Skramble
+	CASBIN
+	400
+	0
+	1000
+	PATCH $1007,$12,$12
+EndRom
+
+BeginRom
+	g:\emulate\software\dragon\tape\android.cas,1,HL,HE,HS
+	Android Attack
+	CASBIN
+	0
+	0
+	0
+EndRom
+
+BeginRom
+; Patch capture of reset so that reset returns to cart
+	g:\emulate\software\dragon\tape\rommels.cas,1,HL,HE,HS,NO,NC
+	Rommel's Revenge
+	CASBIN
+	0
+	0
+	0
+	PATCH $5CAD,$12,$12
+EndRom
+
+BeginRom
+	; Patch capture of reset so that reset returns to cart
+	"g:\emulate\software\dragon\tape\Microdeal - Buzzard Bait - No Dongle hacked.cas",2,HL,HS,HE
+	Buzzard Bait
+	CASBIN
+	0
+	0
+	0
+	PATCH $4F88,$12,$12
+EndRom
+
+BeginRom
+	"g:\emulate\software\dragon\tape\Dragon Data Ltd - Astro Blast.cas",1,HL,HS,HE
+	Astro Blast
+	CASBIN
+	0
+	0
+	0
+EndRom
+
+BeginRom
+	g:\emulate\software\dragon\tape\moon_cre.cas,2,NO,NS,HL
+	Moon Cresta
+	CASBIN
+	600
+	0
+	600
+	PATCH $600,$B7,$FF,$C7,$B7,$FF,$C9,$86,$F8,$B7,$FF,$22,$B7,$FF,$C3,$B7,$FF,$C5,$B7,$FF,$C6,$7E,$24,$00
+EndRom
+
+BeginRom
+; Patch to allow program to load correctly and defeat copy protection (line 1,2)
+; Patch capture of reset so that reset returns to cart (line 3)
+	g:\emulate\software\dragon\tape\backtrac-fixed.cas,2,HL,HS,NO,NC
+	Backtrack
+	CASBIN
+	0
+	0
+	0400
+	PATCH $0400,$86,$A5,$B7,$FF,$22,$B7,$FF,$C5,$B7,$FF,$C7,$7E,$7F,$80
+	PATCH $7f8E,$21
+	PATCH $7F87
+EndRom
+
+BeginRom
+	g:\emulate\software\dragon\tape\HUNCHBAC.cas,2,HL
+	Hunchback
+	CASBIN
+	600
+	0
+	62C0
+EndRom
+
+BeginRom
+	g:\emulate\software\dragon\tape\TREK.cas,1
+	Star Trek
+	CASBASD
+	0
+	0
+	0
+EndRom
+
+BeginRom
+; Patch capture of reset so that reset returns to cart (line 3)
+	"G:\Emulate\software\Dragon\tape\Glove Final Release\glove.bin"
+	Glove
+	BINIMG
+	0600
+	A300
+	307F
+	PATCH $2507,$12,$12,$12
+EndRom
+
+BeginRom
+	"g:\emulate\software\dragon\tape\Synapse Software - Protector.cas",1,HL,HE,HS
+	Protector
+	CASBIN
+	3fd
+	0
+	62C0
+EndRom
+

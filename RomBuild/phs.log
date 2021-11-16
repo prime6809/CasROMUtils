@@ -1,0 +1,261 @@
+
+F:\Phill\SRC\PASCAL\RomLink\Ver1.8\RomLink>copy "Z:\Retro\Dragon\Firmware\MultiCartBoot\Ver 0.99\mcbd.rom" . 
+        1 file(s) copied.
+
+F:\Phill\SRC\PASCAL\RomLink\Ver1.8\RomLink>romlink phs.txt mcbd.rom phs.rom 
+reading romlist
+Loading : g:\emulate\software\dragon\tape\Microdeal - Buzzard Bait - No Dongle hacked.cas
+MaxRunChar=32, MaxRun=17, Most frequent=0 ($00), Least frequent=157 ($9D)
+Compression ratio : 98.87, Orig size : 25600, Compressed size 25311
+Loading : g:\emulate\software\dragon\tape\shock2.cas
+Loading : g:\emulate\software\dragon\tape\shock2.cas
+MaxRunChar=255, MaxRun=59, Most frequent=255 ($FF), Least frequent=157 ($9D)
+Compression ratio : 92.43, Orig size : 25344, Compressed size 23425
+Loading : g:\emulate\software\dragon\cart\DragonData-CaveHunter.rom
+Loading : g:\emulate\software\dragon\cart\DragonData-CosmicInvaders.rom
+Loading : g:\emulate\software\dragon\cart\DragonData-CyrusChess.rom
+Loading : g:\emulate\software\dragon\cart\DragonData-Metioroids.rom
+Loading : g:\emulate\software\dragon\cart\starship.rom
+Loading : g:\emulate\software\dragon\cart\demo.rom
+Loading : g:\emulate\software\dragon\cart\diag.rom
+Loading : g:\emulate\software\dragon\tape\cuthbert.cas
+MaxRunChar=0, MaxRun=241, Most frequent=255 ($FF), Least frequent=114 ($72)
+Compression ratio : 50.83, Orig size : 15874, Compressed size 8069
+Loading : g:\Emulate\software\Dragon\tape\lunar-fixed.cas
+Loading : g:\Emulate\software\Dragon\tape\lunar-fixed.cas
+Loading : g:\Emulate\software\Dragon\tape\lunar-fixed.cas
+MaxRunChar=0, MaxRun=2072, Most frequent=0 ($00), Least frequent=103 ($67)
+Compression ratio : 80.06, Orig size : 28686, Compressed size 22966
+Loading : g:\emulate\software\dragon\tape\devil_as.cas
+MaxRunChar=0, MaxRun=278, Most frequent=0 ($00), Least frequent=214 ($D6)
+Compression ratio : 61.38, Orig size : 16423, Compressed size 10080
+Loading : g:\emulate\software\dragon\tape\whirlybi.cas
+MaxRunChar=255, MaxRun=46, Most frequent=0 ($00), Least frequent=91 ($5B)
+Compression ratio : 95.47, Orig size : 6514, Compressed size 6219
+Loading : g:\emulate\software\dragon\tape\frogger.cas
+MaxRunChar=0, MaxRun=241, Most frequent=255 ($FF), Least frequent=120 ($78)
+Compression ratio : 56.92, Orig size : 30065, Compressed size 17112
+Loading : g:\emulate\software\dragon\tape\phantom_.cas
+MaxRunChar=33, MaxRun=557, Most frequent=0 ($00), Least frequent=178 ($B2)
+Compression ratio : 87.69, Orig size : 13372, Compressed size 11726
+Loading : g:\emulate\software\dragon\snap\ga.ssd
+MaxRunChar=0, MaxRun=129, Most frequent=0 ($00), Least frequent=226 ($E2)
+Compression ratio : 88.49, Orig size : 32770, Compressed size 28998
+Loading : g:\emulate\software\dragon\tape\Chuckie_Egg.cas
+MaxRunChar=0, MaxRun=208, Most frequent=0 ($00), Least frequent=141 ($8D)
+Compression ratio : 84.42, Orig size : 14849, Compressed size 12536
+Loading : g:\emulate\software\dragon\tape\te_king.cas
+MaxRunChar=255, MaxRun=67, Most frequent=0 ($00), Least frequent=177 ($B1)
+Compression ratio : 91.10, Orig size : 24322, Compressed size 22157
+Loading : g:\emulate\software\dragon\tape\manic_miner.cas
+MaxRunChar=0, MaxRun=527, Most frequent=0 ($00), Least frequent=107 ($6B)
+Compression ratio : 88.82, Orig size : 31111, Compressed size 27633
+Loading : G:\emulate\software\dragon\tape\JSW.cas
+MaxRunChar=9, MaxRun=511, Most frequent=0 ($00), Least frequent=243 ($F3)
+Compression ratio : 95.41, Orig size : 32433, Compressed size 30944
+Loading : g:\emulate\software\dragon\tape\SKRAMBLE.cas
+MaxRunChar=0, MaxRun=262, Most frequent=0 ($00), Least frequent=91 ($5B)
+Compression ratio : 69.86, Orig size : 13776, Compressed size 9624
+Loading : g:\emulate\software\dragon\tape\android.cas
+MaxRunChar=0, MaxRun=241, Most frequent=0 ($00), Least frequent=117 ($75)
+Compression ratio : 74.56, Orig size : 29751, Compressed size 22181
+Loading : g:\emulate\software\dragon\MemDump\rrdisk.dmp
+MaxRunChar=0, MaxRun=27, Most frequent=255 ($FF), Least frequent=210 ($D2)
+Compression ratio : 97.55, Orig size : 16997, Compressed size 16581
+Loading : g:\emulate\software\dragon\tape\Dragon Data Ltd - Astro Blast.cas
+MaxRunChar=0, MaxRun=65, Most frequent=0 ($00), Least frequent=114 ($72)
+Compression ratio : 93.98, Orig size : 7255, Compressed size 6818
+Loading : g:\emulate\software\dragon\tape\moon_cre.cas
+MaxRunChar=0, MaxRun=171, Most frequent=0 ($00), Least frequent=133 ($85)
+Compression ratio : 89.71, Orig size : 30524, Compressed size 27382
+Loading : g:\emulate\software\dragon\tape\HUNCHBAC.cas
+MaxRunChar=0, MaxRun=335, Most frequent=0 ($00), Least frequent=125 ($7D)
+Compression ratio : 81.26, Orig size : 30208, Compressed size 24546
+Loading : g:\emulate\software\dragon\tape\TREK.cas
+MaxRunChar=32, MaxRun=10, Most frequent=32 ($20), Least frequent=5 ($05)
+Compression ratio : 99.20, Orig size : 10675, Compressed size 10590
+Loading : g:\emulate\software\dragon\tape\Synapse Software - Protector.cas
+MaxRunChar=160, MaxRun=39, Most frequent=0 ($00), Least frequent=113 ($71)
+Compression ratio : 96.74, Orig size : 17902, Compressed size 17318
+Loading : g:\emulate\software\dragon\tape\3D Lunattack (1984)(Hewson Consultants).cas
+MaxRunChar=0, MaxRun=240, Most frequent=0 ($00), Least frequent=162 ($A2)
+Compression ratio : 93.96, Orig size : 26266, Compressed size 24680
+Loading : g:\emulate\software\dragon\tape\Hewson Consultants - 3D Seiddab Attack.cas
+MaxRunChar=0, MaxRun=651, Most frequent=0 ($00), Least frequent=205 ($CD)
+Compression ratio : 79.65, Orig size : 29594, Compressed size 23571
+Loading : g:\emulate\software\dragon\tape\JET_BOOT_FIXED.CAS
+Loading : g:\emulate\software\dragon\tape\JET_BOOT_FIXED.CAS
+MaxRunChar=255, MaxRun=127, Most frequent=0 ($00), Least frequent=97 ($61)
+Compression ratio : 79.76, Orig size : 9728, Compressed size 7759
+Loading : g:\emulate\software\dragon\tape\Microdeal - Cuthbert in the Jungle [exec].cas
+MaxRunChar=0, MaxRun=123, Most frequent=0 ($00), Least frequent=121 ($79)
+Compression ratio : 93.25, Orig size : 8890, Compressed size 8290
+Loading : g:\emulate\software\dragon\tape\fantasy-fight.cas
+MaxRunChar=85, MaxRun=72, Most frequent=0 ($00), Least frequent=181 ($B5)
+Compression ratio : 95.19, Orig size : 24588, Compressed size 23406
+Loading : g:\emulate\software\dragon\tape\blaby computer games - cosmic crusader.cas
+MaxRunChar=128, MaxRun=512, Most frequent=170 ($AA), Least frequent=184 ($B8)
+Compression ratio : 88.71, Orig size : 31036, Compressed size 27533
+Loading : g:\emulate\software\dragon\tape\alcatraz-side b.cas
+MaxRunChar=32, MaxRun=11, Most frequent=40 ($28), Least frequent=15 ($0F)
+Compression ratio : 99.86, Orig size : 10261, Compressed size 10247
+Loading : g:\emulate\software\dragon\tape\invasion.cas
+MaxRunChar=0, MaxRun=15, Most frequent=0 ($00), Least frequent=93 ($5D)
+Compression ratio : 96.06, Orig size : 12094, Compressed size 11617
+Loading : g:\emulate\software\dragon\tape\rommel_3.cas
+MaxRunChar=255, MaxRun=510, Most frequent=255 ($FF), Least frequent=154 ($9A)
+Compression ratio : 81.17, Orig size : 24736, Compressed size 20079
+Loading : g:\emulate\software\dragon\tape\painter.cas
+MaxRunChar=0, MaxRun=2171, Most frequent=0 ($00), Least frequent=107 ($6B)
+Compression ratio : 66.77, Orig size : 16320, Compressed size 10897
+Loading : g:\emulate\software\dragon\tape\backtrac-fixed.cas
+MaxRunChar=128, MaxRun=512, Most frequent=0 ($00), Least frequent=148 ($94)
+Compression ratio : 93.04, Orig size : 32431, Compressed size 30175
+Loading : g:\emulate\software\dragon\tape\duncan bryan - buzzing bertie.cas
+MaxRunChar=0, MaxRun=3937, Most frequent=0 ($00), Least frequent=162 ($A2)
+Compression ratio : 77.83, Orig size : 24768, Compressed size 19277
+Loading : g:\emulate\software\dragon\tape\space_wa.cas
+MaxRunChar=42, MaxRun=33, Most frequent=0 ($00), Least frequent=135 ($87)
+Compression ratio : 97.93, Orig size : 18419, Compressed size 18037
+Loading : g:\emulate\software\dragon\tape\attack.cas
+MaxRunChar=170, MaxRun=131, Most frequent=0 ($00), Least frequent=58 ($3A)
+Compression ratio : 84.21, Orig size : 6658, Compressed size 5607
+Loading : g:\emulate\software\dragon\tape\scarfman.cas
+MaxRunChar=96, MaxRun=83, Most frequent=143 ($8F), Least frequent=47 ($2F)
+Compression ratio : 90.34, Orig size : 3324, Compressed size 3003
+Loading : g:\emulate\software\dragon\tape\keywizad-fixed.cas
+MaxRunChar=0, MaxRun=278, Most frequent=255 ($FF), Least frequent=175 ($AF)
+Compression ratio : 73.30, Orig size : 27846, Compressed size 20410
+Loading : g:\emulate\software\dragon\MemDump\pengion.dmp
+MaxRunChar=205, MaxRun=2721, Most frequent=205 ($CD), Least frequent=123 ($7B)
+Compression ratio : 69.54, Orig size : 9472, Compressed size 6587
+Loading : g:\emulate\software\dragon\tape\draconian-exec.cas
+MaxRunChar=0, MaxRun=5120, Most frequent=0 ($00), Least frequent=178 ($B2)
+Compression ratio : 68.39, Orig size : 30966, Compressed size 21179
+Loading : g:\emulate\software\dragon\tape\katerpil.cas
+MaxRunChar=0, MaxRun=241, Most frequent=255 ($FF), Least frequent=62 ($3E)
+Compression ratio : 39.90, Orig size : 17558, Compressed size 7006
+read romlist
+Read 8192 bytes from MenuFile:mcbd.rom
+width=256, height=192
+Read 6144 bytes from MenuFile:F:\Phill\SRC\PASCAL\RomLink\Ver1.6\rh2.bmp
+Splashfile.position=0
+RomImage.position=0
+RomImage.position=8192
+Splashfile.position=6144
+RomImage.position=14336
+RomImage.position=16384
+Wrote 16384 bytes
+Copied data at pos 02, offset=0000, start=0000,len=8000,entry=0000,Dragon 32 Diagnostic
+Wrote 8192 bytes
+Copied data at pos 04, offset=0000, start=0000,len=8000,entry=0000,Cave Hunter
+Wrote 8192 bytes
+Copied data at pos 05, offset=0000, start=0000,len=8000,entry=0000,Cosmic Invaders
+Wrote 8192 bytes
+Copied data at pos 06, offset=0000, start=0000,len=8000,entry=0000,Cyrus Chess
+Wrote 8192 bytes
+Copied data at pos 07, offset=0000, start=0000,len=8000,entry=0000,Metioroids
+Wrote 8192 bytes
+Copied data at pos 08, offset=0000, start=0000,len=8000,entry=0000,Starship Chameleon
+Wrote 8192 bytes
+Copied data at pos 09, offset=0000, start=0000,len=8000,entry=0000,Dragon 32 Demo
+Wrote 25311 bytes
+Copied data at pos 10, offset=0000, start=1C00,len=6400,entry=4F6E,Buzzard Bait
+Wrote 23425 bytes
+Copied data at pos 13, offset=02DF, start=1C00,len=6300,entry=1C00,Shock Trooper
+Wrote 8069 bytes
+Copied data at pos 15, offset=1E60, start=0100,len=3E02,entry=0000,Cuthbert Goes Walkabout
+Wrote 22966 bytes
+Copied data at pos 16, offset=1DE5, start=0400,len=700E,entry=240A,Lunar Rover Patrol
+Wrote 10080 bytes
+Copied data at pos 19, offset=179B, start=0100,len=4027,entry=0000,Devil Assault
+Wrote 6219 bytes
+Copied data at pos 20, offset=1EFB, start=1F00,len=1972,entry=2000,Whirlybird Run
+Wrote 17112 bytes
+Copied data at pos 21, offset=1746, start=0100,len=7571,entry=0000,Frogger
+Wrote 11726 bytes
+Copied data at pos 23, offset=1A1E, start=2121,len=343C,entry=408F,Phantom Slayer
+Wrote 28998 bytes
+Copied data at pos 25, offset=07EC, start=0000,len=8002,entry=0000,Galagon (old)
+Wrote 12536 bytes
+Copied data at pos 28, offset=1932, start=3600,len=3A01,entry=52CA,Chuckie Egg
+Wrote 22157 bytes
+Copied data at pos 30, offset=0A2A, start=2000,len=5F02,entry=201E,The King
+Wrote 27633 bytes
+Copied data at pos 33, offset=00B7, start=0150,len=7987,entry=B400,Manic Miner
+Wrote 30944 bytes
+Copied data at pos 36, offset=0CA8, start=0150,len=7EB1,entry=0ABA,Jet Set Willy
+Wrote 9624 bytes
+Copied data at pos 40, offset=0588, start=0400,len=35D0,entry=1000,Skramble
+Wrote 22181 bytes
+Copied data at pos 41, offset=0B20, start=0100,len=7437,entry=0000,Android Attack
+Wrote 16581 bytes
+Copied data at pos 44, offset=01C5, start=0C00,len=4265,entry=0C00,Rommel's Revenge
+Wrote 6818 bytes
+Copied data at pos 46, offset=028A, start=5000,len=1C57,entry=5000,Astro Blast
+Wrote 27382 bytes
+Copied data at pos 46, offset=1D2C, start=0600,len=773C,entry=0600,Moon Cresta
+Wrote 24546 bytes
+Copied data at pos 50, offset=0822, start=0600,len=7600,entry=62C0,Hunchback
+Wrote 10590 bytes
+Copied data at pos 53, offset=0804, start=4558,len=29B3,entry=C920,Star Trek
+Wrote 17318 bytes
+Copied data at pos 54, offset=1162, start=1BBC,len=45EE,entry=1DB7,Protector
+Wrote 24680 bytes
+Copied data at pos 56, offset=1508, start=0167,len=669A,entry=2600,3D Lunattack
+Wrote 23571 bytes
+Copied data at pos 59, offset=1570, start=0167,len=739A,entry=2A00,3D Seiddab Attack
+Wrote 7759 bytes
+Copied data at pos 62, offset=1183, start=1C00,len=2600,entry=4100,Jet Boot Colin
+Wrote 8290 bytes
+Copied data at pos 63, offset=0FD2, start=1E00,len=22BA,entry=4000,Cuthbert In The Jungle
+Wrote 23406 bytes
+Copied data at pos 64, offset=1034, start=1E50,len=600C,entry=608E,Fantasy Fight
+Wrote 27533 bytes
+Copied data at pos 67, offset=0BA2, start=00A6,len=793C,entry=4C53,Cosmic Crusader
+Wrote 10247 bytes
+Copied data at pos 70, offset=172F, start=3B43,len=2815,entry=4F31,Alcatraz II
+Wrote 11617 bytes
+Copied data at pos 71, offset=1F36, start=1C0A,len=2F3E,entry=3F08,Planet Invasion
+Wrote 20079 bytes
+Copied data at pos 73, offset=0C97, start=1E00,len=60A0,entry=1E00,Rommel 3D
+Wrote 10897 bytes
+Copied data at pos 75, offset=1B06, start=0167,len=3FC0,entry=0C00,Crazy Painter
+Wrote 30175 bytes
+Copied data at pos 77, offset=0597, start=010D,len=7EAF,entry=7F8C,Backtrack
+Wrote 19277 bytes
+Copied data at pos 80, offset=1B76, start=1F41,len=60C0,entry=1FC0,Buzzing Bertie
+Wrote 18037 bytes
+Copied data at pos 83, offset=06C3, start=073F,len=47F3,entry=073F,Space War
+Wrote 5607 bytes
+Copied data at pos 85, offset=0D38, start=4D00,len=1A02,entry=6000,Attack
+Wrote 3003 bytes
+Copied data at pos 86, offset=031F, start=038B,len=0CFC,entry=0765,Scarfman
+Wrote 20410 bytes
+Copied data at pos 86, offset=0EDA, start=0400,len=6CC6,entry=7001,Keys Of The Wizard
+Wrote 6587 bytes
+Copied data at pos 88, offset=1E94, start=2000,len=2500,entry=42E1,Pengion
+Wrote 21179 bytes
+Copied data at pos 89, offset=184F, start=0600,len=78F6,entry=5CEB,Draconian
+Wrote 7006 bytes
+Copied data at pos 92, offset=0B0A, start=0100,len=4496,entry=0000,Katerpilla Attack
+Menu sorted.....
+Linked rom is 745K, 279K free 
+
+F:\Phill\SRC\PASCAL\RomLink\Ver1.8\RomLink>copy phs*.rom g:\emulate\software\dragon\cart\ 
+phs.rom
+phs0.rom
+phs1.rom
+        3 file(s) copied.
+
+F:\Phill\SRC\PASCAL\RomLink\Ver1.8\RomLink>dir phs*.rom 
+ Volume in drive F is Data
+ Volume Serial Number is 1866-E870
+
+ Directory of F:\Phill\SRC\PASCAL\RomLink\Ver1.8\RomLink
+
+10/08/2017  10:26           763,496 phs.rom
+10/08/2017  10:26           524,287 phs0.rom
+10/08/2017  10:26           239,208 phs1.rom
+               3 File(s)      1,526,991 bytes
+               0 Dir(s)  22,634,643,456 bytes free
