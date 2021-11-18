@@ -25,13 +25,14 @@ CONST
      SecBeginRom        = 'BEGINROM';
      SecEndRom          = 'ENDROM';
 
-
      RTRom      = $00;  { Binary rom, org $C000 }
      RTCasBin   = $01;  { Cassette file image, binary }
      RTCasBas   = $02;  { Cassette file image, BASIC }
      RTCasAny   = $03;  { Combination of both cas types, for search }
      RTBinary   = $04;  { Binary memory image }
      RTSnapMMC  = $05;  { DragonMMC snapshot file }
+     RTDDMMCBin = $06;  { Dragon DOS / DragonMMC binary file }
+     RTDDMMCBas = $07;  { Dragon DOS / DragonMMC basic file }
 
      RTFlagCompress     = $08;  { Entry is compressed }
      RTFlagDisableFIRQ  = $10;  { Disable FIRQ in CPLD before running }
@@ -47,6 +48,9 @@ CONST
      KeyRTCasBasCoCo    = 'CASBASC';
      KeyRTBinaryImage   = 'BINIMG';
      KeyRTDragonMMCSnap = 'MMCSNAP';
+     KeyRTDDMMCBin      = 'DDMMCBIN';
+     KeyRTDDMMCBas      = 'DDMMCBAS';
+
 
      {If this is a BASIC program, is it a Dragon or CoCo one}
      {Setting this allows the basic loader to re-tokenize if}
@@ -197,6 +201,7 @@ type
        FUNCTION DoLoadCAS(LocalFileName      : STRING;
                           FileNo             : INTEGER) : BOOLEAN;
        FUNCTION DoLoadDragonMMCSnap(LocalFileName      : STRING) : BOOLEAN;
+       FUNCTION DoLoadDDragonDosDMMC(LocalFileName      : STRING) : BOOLEAN;
 
        Function FixupFileName(InFileName       : STRING) : STRING;
        Function GetWriteRomType : BYTE;
@@ -702,8 +707,11 @@ BEGIN;
     Result:=RTBinary;
   IF (RomTypeDecode=KeyRTDragonMMCSnap) THEN
     Result:=RTSnapMMC;
+  IF (RomTypeDecode=KeyRTDDMMCBin) THEN
+    Result:=RTDDMMCBin;
+  IF (RomTypeDecode=KeyRTDDMMCBas) THEN
+    Result:=RTDDMMCBas;
 END;
-
 FUNCTION TRomEntry.DoLoadROMorBin(LocalFileName      : STRING) : BOOLEAN;
 
 VAR
@@ -854,6 +862,14 @@ BEGIN;
   Result:=TRUE;
 END;
 
+{***************************************************************************}
+{**                                                                       **}
+{** Load a DragonDOS or DragonMMC format file.                            **}
+{**                                                                       **}
+{***************************************************************************}
+FUNCTION TRomEntry.DoLoadDDragonDosDMMC(LocalFileName      : STRING) : BOOLEAN;
+BEGIN
+END;
 
 {***************************************************************************}
 {**                                                                       **}
@@ -1130,6 +1146,9 @@ BEGIN;
 
       {DragonMMC snapshot file}
       RTSnapMMC         : Result:=DoLoadDragonMMCSnap(LocalFileName);
+
+      RTDDMMCBin,
+      RTDDMMCBas        : Result:=DoLoadDDragonDosDMMC(LocalFileName);
     END;
 
     IF (NOT Result) THEN

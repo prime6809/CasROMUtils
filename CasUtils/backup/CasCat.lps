@@ -9,10 +9,10 @@
         <Filename Value="CasCat.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="252"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="267"/>
         <CursorPos X="3" Y="268"/>
         <UsageCount Value="20"/>
-        <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="memmapunit.pas"/>
@@ -22,25 +22,15 @@
       </Unit1>
       <Unit2>
         <Filename Value="..\Libs\RamothMemoryStream.pas"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="20" Y="167"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit2>
     </Units>
-    <JumpHistory Count="3" HistoryIndex="2">
-      <Position1>
-        <Filename Value="CasCat.lpr"/>
-      </Position1>
-      <Position2>
-        <Filename Value="CasCat.lpr"/>
-        <Caret Line="11" Column="45"/>
-      </Position2>
-      <Position3>
-        <Filename Value="CasCat.lpr"/>
-        <Caret Line="18" Column="26"/>
-      </Position3>
-    </JumpHistory>
+    <General>
+      <ActiveWindowIndexAtStart Value="-1"/>
+    </General>
+    <JumpHistory HistoryIndex="-1"/>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes Count="0" ActiveMode=""/>

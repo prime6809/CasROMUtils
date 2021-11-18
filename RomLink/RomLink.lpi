@@ -8,14 +8,79 @@
         <LRSInOutputDirectory Value="False"/>
       </Flags>
       <MainUnit Value="0"/>
-      <ActiveWindowIndexAtStart Value="-1"/>
     </General>
     <VersionInfo>
       <Language Value=""/>
       <CharSet Value=""/>
     </VersionInfo>
-    <BuildModes Count="1">
+    <BuildModes Count="3" Active="Debug">
       <Item1 Name="default" Default="True"/>
+      <Item2 Name="Debug">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <PathDelim Value="\"/>
+          <Target>
+            <Filename Value="..\bin\RomLink.exe"/>
+          </Target>
+          <SearchPaths>
+            <OtherUnitFiles Value="..\Libs;..\CasLib"/>
+            <UnitOutputDirectory Value="..\units\lib\$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <Parsing>
+            <SyntaxOptions>
+              <IncludeAssertionCode Value="True"/>
+              <UseAnsiStrings Value="False"/>
+            </SyntaxOptions>
+          </Parsing>
+          <CodeGeneration>
+            <Checks>
+              <IOChecks Value="True"/>
+              <RangeChecks Value="True"/>
+              <OverflowChecks Value="True"/>
+              <StackChecks Value="True"/>
+            </Checks>
+            <VerifyObjMethodCallValidity Value="True"/>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <DebugInfoType Value="dsDwarf2Set"/>
+              <UseHeaptrc Value="True"/>
+              <TrashVariables Value="True"/>
+              <UseExternalDbgSyms Value="True"/>
+            </Debugging>
+          </Linking>
+        </CompilerOptions>
+      </Item2>
+      <Item3 Name="Release">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <PathDelim Value="\"/>
+          <Target>
+            <Filename Value="..\bin\RomLink.exe"/>
+          </Target>
+          <SearchPaths>
+            <OtherUnitFiles Value="..\Libs;..\CasLib"/>
+            <UnitOutputDirectory Value="..\units\lib\$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <Parsing>
+            <SyntaxOptions>
+              <UseAnsiStrings Value="False"/>
+            </SyntaxOptions>
+          </Parsing>
+          <CodeGeneration>
+            <SmartLinkUnit Value="True"/>
+            <Optimizations>
+              <OptimizationLevel Value="3"/>
+            </Optimizations>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <GenerateDebugInfo Value="False"/>
+            </Debugging>
+            <LinkSmart Value="True"/>
+          </Linking>
+        </CompilerOptions>
+      </Item3>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
@@ -48,21 +113,22 @@
       <Unit0>
         <Filename Value="RomLink.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="465"/>
-        <CursorPos Y="496"/>
+        <TopLine Value="289"/>
+        <CursorPos X="17" Y="254"/>
         <UsageCount Value="240"/>
+        <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="RomList.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="1039"/>
-        <CursorPos X="9" Y="1061"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="1111"/>
+        <CursorPos X="71" Y="1151"/>
         <UsageCount Value="120"/>
         <Bookmarks Count="1">
-          <Item0 X="58" Y="779"/>
+          <Item0 X="58" Y="787"/>
         </Bookmarks>
+        <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="Utils.pas"/>
@@ -151,7 +217,68 @@
         <UsageCount Value="10"/>
       </Unit13>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory Count="15" HistoryIndex="14">
+      <Position1>
+        <Filename Value="RomLink.pas"/>
+        <Caret Line="254" Column="17" TopLine="289"/>
+      </Position1>
+      <Position2>
+        <Filename Value="RomList.pas"/>
+        <Caret Line="27" TopLine="176"/>
+      </Position2>
+      <Position3>
+        <Filename Value="RomList.pas"/>
+        <Caret Line="45" Column="14" TopLine="380"/>
+      </Position3>
+      <Position4>
+        <Filename Value="RomList.pas"/>
+        <Caret Line="197" Column="30" TopLine="177"/>
+      </Position4>
+      <Position5>
+        <Filename Value="RomList.pas"/>
+        <Caret Line="400" Column="31" TopLine="363"/>
+      </Position5>
+      <Position6>
+        <Filename Value="RomList.pas"/>
+        <Caret Line="709" Column="28" TopLine="678"/>
+      </Position6>
+      <Position7>
+        <Filename Value="RomList.pas"/>
+        <Caret Line="35" Column="16" TopLine="13"/>
+      </Position7>
+      <Position8>
+        <Filename Value="RomList.pas"/>
+        <Caret Line="117" Column="11" TopLine="95"/>
+      </Position8>
+      <Position9>
+        <Filename Value="RomList.pas"/>
+        <Caret Line="51" Column="19" TopLine="22"/>
+      </Position9>
+      <Position10>
+        <Filename Value="RomList.pas"/>
+        <Caret Line="313" Column="17" TopLine="283"/>
+      </Position10>
+      <Position11>
+        <Filename Value="RomList.pas"/>
+        <Caret Line="715" Column="26" TopLine="678"/>
+      </Position11>
+      <Position12>
+        <Filename Value="RomList.pas"/>
+        <Caret Line="738" Column="26" TopLine="701"/>
+      </Position12>
+      <Position13>
+        <Filename Value="RomList.pas"/>
+        <Caret Line="756" Column="33" TopLine="719"/>
+      </Position13>
+      <Position14>
+        <Filename Value="RomList.pas"/>
+        <Caret Line="841" Column="26" TopLine="804"/>
+      </Position14>
+      <Position15>
+        <Filename Value="RomList.pas"/>
+        <Caret Line="870" Column="26" TopLine="833"/>
+      </Position15>
+    </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="11"/>

@@ -3,13 +3,13 @@
   <ProjectSession>
     <PathDelim Value="\"/>
     <Version Value="11"/>
-    <BuildModes Active="Default"/>
+    <BuildModes Active="Debug"/>
     <Units Count="3">
       <Unit0>
         <Filename Value="CasCat.lpr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
         <TopLine Value="267"/>
         <CursorPos X="3" Y="268"/>
         <UsageCount Value="20"/>

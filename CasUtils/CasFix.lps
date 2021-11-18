@@ -3,13 +3,13 @@
   <ProjectSession>
     <PathDelim Value="\"/>
     <Version Value="11"/>
-    <BuildModes Active="Default"/>
+    <BuildModes Active="Debug"/>
     <Units Count="4">
       <Unit0>
         <Filename Value="CasFix.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
         <TopLine Value="37"/>
         <CursorPos X="16" Y="191"/>
         <UsageCount Value="20"/>

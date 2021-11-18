@@ -251,7 +251,7 @@ FUNCTION TRomLink.FileNumber(FileName    : STRING;
                              FileNo      : INTEGER) : STRING;
 
 VAR     Ext     : STRING;
-        FName    : STRING;
+        FName   : STRING;
         ExtPos  : INTEGER;
 
 BEGIN;

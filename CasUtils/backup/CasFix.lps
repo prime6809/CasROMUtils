@@ -9,28 +9,26 @@
         <Filename Value="CasFix.pas"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="169"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="37"/>
         <CursorPos X="16" Y="191"/>
         <UsageCount Value="20"/>
-        <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="..\Libs\ramothcustomapplicationunit.pas"/>
         <UnitName Value="RamothCustomApplicationUnit"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="16"/>
         <CursorPos X="61" Y="56"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="C:\lazarus\fpc\3.2.0\source\packages\fcl-base\src\custapp.pp"/>
         <UnitName Value="CustApp"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="133"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="112"/>
         <CursorPos X="14" Y="96"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="C:\lazarus\fpc\3.2.0\source\rtl\objpas\objpas.pp"/>
@@ -40,52 +38,10 @@
         <UsageCount Value="10"/>
       </Unit3>
     </Units>
-    <JumpHistory Count="11" HistoryIndex="10">
-      <Position1>
-        <Filename Value="CasFix.pas"/>
-        <Caret Line="102" Column="20"/>
-      </Position1>
-      <Position2>
-        <Filename Value="..\Libs\ramothcustomapplicationunit.pas"/>
-        <Caret Line="38" Column="36" TopLine="13"/>
-      </Position2>
-      <Position3>
-        <Filename Value="..\Libs\ramothcustomapplicationunit.pas"/>
-        <Caret Line="17" Column="24"/>
-      </Position3>
-      <Position4>
-        <Filename Value="..\Libs\ramothcustomapplicationunit.pas"/>
-        <Caret Line="35" Column="28" TopLine="20"/>
-      </Position4>
-      <Position5>
-        <Filename Value="..\Libs\ramothcustomapplicationunit.pas"/>
-        <Caret Line="38" Column="29" TopLine="16"/>
-      </Position5>
-      <Position6>
-        <Filename Value="..\Libs\ramothcustomapplicationunit.pas"/>
-        <Caret Line="35" Column="45" TopLine="16"/>
-      </Position6>
-      <Position7>
-        <Filename Value="CasFix.pas"/>
-        <Caret Line="22" Column="15"/>
-      </Position7>
-      <Position8>
-        <Filename Value="CasFix.pas"/>
-        <Caret Line="101" Column="3" TopLine="81"/>
-      </Position8>
-      <Position9>
-        <Filename Value="CasFix.pas"/>
-        <Caret Line="159" TopLine="103"/>
-      </Position9>
-      <Position10>
-        <Filename Value="CasFix.pas"/>
-        <Caret Line="23" Column="3" TopLine="10"/>
-      </Position10>
-      <Position11>
-        <Filename Value="CasFix.pas"/>
-        <Caret Line="36" Column="21" TopLine="18"/>
-      </Position11>
-    </JumpHistory>
+    <General>
+      <ActiveWindowIndexAtStart Value="-1"/>
+    </General>
+    <JumpHistory HistoryIndex="-1"/>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes Count="0" ActiveMode=""/>
