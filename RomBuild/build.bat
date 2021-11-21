@@ -5,7 +5,7 @@ SET INFILE="%1.txt"
 if not exist "%INFILE%" goto nofile
 
 copy "Z:\Retro\Dragon\Firmware\MultiCartBoot\Ver 0.99\mcbd.rom" .
-..\RomLink\romlink %INFILE% mcbd.rom %1.rom
+..\bin\romlink %INFILE% mcbd.rom %1.rom
 copy %1*.rom g:\emulate\software\dragon\cart\
 dir %1*.rom
 

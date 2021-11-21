@@ -14,7 +14,8 @@ interface
 
 uses contnrs,classes,SysUtils,RamothMemoryStream,DragonCoCoCasUnit,
      DragonCoCoCasNameBlockUnit,Utils,RamothStringListUnit,
-     DragonCoCoCASDefsUnit,RLECompressUnit,fpexprpars,ConsoleUtils;
+     DragonCoCoCASDefsUnit,RLECompressUnit,fpexprpars,ConsoleUtils,
+     DragonDOSMMCBinFileUnit;
 
 CONST
      {Section begin/end within config file}
@@ -50,7 +51,6 @@ CONST
      KeyRTDragonMMCSnap = 'MMCSNAP';
      KeyRTDDMMCBin      = 'DDMMCBIN';
      KeyRTDDMMCBas      = 'DDMMCBAS';
-
 
      {If this is a BASIC program, is it a Dragon or CoCo one}
      {Setting this allows the basic loader to re-tokenize if}
@@ -159,6 +159,7 @@ type
      PUBLIC
        FileNames        : TStringList;  { Filenames for new format entries }
        Patches          : TStringList;  { Patches to the loaded data }
+       ControlSection   : TStringList;  { Section of the control file }
        Text             : STRING;       { Text to be displayed in menu }
        RomType          : BYTE;         { Rom type, Rom, CasBin or CasBas, Binary }
 
@@ -221,9 +222,13 @@ type
 
        Function HexConv(Line   : STRING) : WORD;
        PROCEDURE ReadNextEntry;
-       FUNCTION FindSection(Token       : STRING) : BOOLEAN;
-       FUNCTION GetSection(TokenBegin   : STRING;
-                           TokenEnd     : STRING) : TRamothStringList;
+       FUNCTION FindSection(Token           : STRING) : BOOLEAN;
+       FUNCTION GetSection(TokenBegin       : STRING;
+                           TokenEnd         : STRING;
+                           IncludeTokens    : BOOLEAN = FALSE) : TRamothStringList;
+       PROCEDURE CleanSection(TokenBegin    : STRING;
+                              TokenEnd      : STRING;
+                              VAR ToClean   : TRamothStringList);
      PUBLIC
        First8K          : INTEGER;      { Index of first 8K rom }
        First16K         : INTEGER;      { Index of first 16K rom }
@@ -240,6 +245,7 @@ type
        Function FindNextBlock(BType  : Byte;
                               Size   : Int64) : TRomEntry;
        PROCEDURE SortMenu;
+       PROCEDURE OutputSortedFile(OutFileName   : STRING);
     end;
 
      TPatch     = class(TRamothMemoryStream)
@@ -306,22 +312,10 @@ begin;
     LoadFromFile(FileName);
     First;
 
-    {Trim lines, and remove comments}
-    First;
-    WHILE (StrIndex<Count) DO
-    BEGIN;
-      Strings[StrIndex]:=Trim(Strings[StrIndex]);
-      IF (((Length(Strings[StrIndex])>0) AND
-           (Strings[StrIndex][1] IN [';','#'])) OR
-           (Length(Strings[StrIndex])=0)) THEN
-        Delete(StrIndex)
-      ELSE
-        NextLine;
-    END;
-
     {Read in config section and set global parameters}
     First;
     Config:=GetSection(SecBeginConfig,SecEndConfig);
+    CleanSection(SecBeginConfig,SecEndConfig,Config);
 
     TRY
       IF (Config.Count>0) THEN
@@ -377,26 +371,32 @@ END;
 
 PROCEDURE TRomList.ReadNextEntry;
 
-VAR
-        Entry   : TRomEntry;
-        Param   : TStringList;
-        Line    : STRING;
-        UpLine  : STRING;
-        Section : TRamothStringList;
-        Idx     : INTEGER;
+VAR     Entry       : TRomEntry;
+        Param       : TStringList;
+        Line        : STRING;
+        WriteLine   : STRING;
+        UpLine      : STRING;
+        Section     : TRamothStringList;
+        Idx         : INTEGER;
 
 BEGIN;
   Param:=TStringList.Create;
   Section:=TRamothStringList.Create;
   TRY
-    Section:=GetSection(SecBeginRom,SecEndRom);
+    Section:=GetSection(SecBeginRom,SecEndRom,TRUE);
 
-    IF (Section.Count>0) THEN
+    {As we are now getting begin and end markers, then the returned section}
+    {must have more than 2 lines (markers + data lines}
+    IF (Section.Count>2) THEN
     BEGIN;
       {Create an entry to read the next rom}
       Entry:=TRomEntry.Create(FCompress);
       WITH Entry DO
       BEGIN;
+        {Copy control file section into RomEntry}
+        ControlSection.AddStrings(Section);
+        CleanSection(SecBeginRom,SecEndRom,Section);
+
         {Read in fields from control file, ROM type and entry name first}
         RomType:=DecodeRomType(Section.Next);
         Text:=Section.Next;
@@ -404,9 +404,10 @@ BEGIN;
 
         {Check for files, patches, VDG/SAM Modes etc}
         PatchesApplied:=0;
+        WriteLine:='';
         WHILE (NOT Section.Eof) DO
         BEGIN;
-          Line:=Trim(Section.Next);
+          Line:=Section.Next;
           UpLine:=UpperCase(Line);
 
           IF (Pos(TokLoad,UpLine)=1) THEN
@@ -425,7 +426,7 @@ BEGIN;
             Entry.GetVDGMode(Line);
 
           IF (Pos(TokWrite,UpLine)=1) THEN
-            Entry.SetStartEndExec(Line);
+            WriteLine:=Line;
 
           IF (Pos(TokFlags,UpLine)=1) THEN
             Entry.SetFlags(Line);
@@ -439,6 +440,9 @@ BEGIN;
 
         FOR Idx:=0 TO (Patches.Count-1) DO
           ProcessPatch(Idx);
+
+        IF (WriteLine<>'') THEN
+          Entry.SetStartEndExec(WriteLine);
 
         IF (RomType=RTRom) THEN
           RomData.PadToMultiple(RomSize)
@@ -500,18 +504,19 @@ FUNCTION TRomList.FindSection(Token       : STRING) : BOOLEAN;
 BEGIN;
   Result:=FALSE;
   Token:=UpperCase(Token);
-  WHILE ((NOT FileText.EOF) AND (UpperCase(FileText.Current)<>Token)) DO
+  WHILE ((NOT FileText.EOF) AND (UpperCase(FileText.Current(TRUE))<>Token)) DO
   BEGIN;
-    WriteDebugLn(DbgSection,'[%d] %s',[FileText.StrIndex,FileText.Current]);
+    WriteDebugLn(DbgSection,'[%d] %s',[FileText.StrIndex,FileText.Current(TRUE)]);
 
     FileText.NextLine;
   END;
 
-  Result:=(UpperCase(FileText.Current)=Token);
+  Result:=(UpperCase(FileText.Current(TRUE))=Token);
 END;
 
-FUNCTION TRomList.GetSection(TokenBegin   : STRING;
-                             TokenEnd     : STRING) : TRamothStringList;
+FUNCTION TRomList.GetSection(TokenBegin     : STRING;
+                             TokenEnd       : STRING;
+                             IncludeTokens  : BOOLEAN = FALSE) : TRamothStringList;
 
 VAR     SectionBegin    : INTEGER;
         SectionEnd      : INTEGER;
@@ -535,13 +540,59 @@ BEGIN;
     WriteDebugLn(DbgSection,'Section %s end %d',[TokenEnd,SectionEnd]);
   END;
 
-  FOR LineIdx:=(SectionBegin+1) TO (SectionEnd-1) DO
+  { We found a section begin, without an end, assume EOF=end of section}
+  IF ((SectionBegin <> -1) AND (SectionEnd = -1)) THEN
+    SectionEnd:=FileText.Count-1;
+
+  {Check that we found the section!}
+  IF ((SectionBegin <> -1) AND (SectionEnd <> -1)) THEN
   BEGIN;
-    Result.Add(FileText.Strings[LineIdx]);
-    WriteDebugLn(DbgSection,FileText.Strings[LineIdx],[]);
+    IF (NOT IncludeTokens) THEN
+    BEGIN;
+      SectionBegin:=SectionBegin+1;
+      SectionEnd:=SectionEnd-1;
+    END;
+
+
+    FOR LineIdx:=SectionBegin TO SectionEnd DO
+    BEGIN;
+      Result.Add(FileText.Strings[LineIdx]);
+      WriteDebugLn(DbgSection,FileText.Strings[LineIdx],[]);
+    END;
   END;
 
   Result.First;
+END;
+{***************************************************************************}
+{**                                                                       **}
+{** CleanSection takes a raw control file section, removes the specified  **}
+{** bigin and end tokens, removes comment lines and trims leading and     **}
+{** trailing spaces from the remainder of the lines.                      **}
+{** We do this now on a per section basis rather than globally as it      **}
+{** allows us to preserve section layout if we want to output a sorted    **}
+{** control file.                                                         **}
+{**                                                                       **}
+{***************************************************************************}
+
+PROCEDURE TRomList.CleanSection(TokenBegin  : STRING;
+                                TokenEnd    : STRING;
+                                VAR ToClean : TRamothStringList);
+VAR Idx     : INTEGER;
+    Line    : STRING;
+    ULine   : STRING;
+
+BEGIN;
+  FOR Idx:=(ToClean.Count-1) DOWNTO 0 DO
+  BEGIN;
+    Line:=Trim(ToClean.Strings[Idx]);
+    ULine:=UpperCase(Line);
+    IF ((Line='') OR (ULine=TokenBegin) OR (ULine=TokenEnd) OR (ULine[1] IN [';','#'])) THEN
+      ToClean.Delete(Idx)
+    ELSE
+      ToClean.Strings[Idx]:=Line;
+  END;
+
+  ToClean.First;
 END;
 
 Function TRomList.HexConv(Line   : STRING) : WORD;
@@ -555,9 +606,6 @@ begin;
 
   if(NOT TryStrToInt(Line,IntRes)) then { If conversion error, display message }
     WriteLn(Format('Error in control file %s is an invalid hex number',[Line]));
-
-//  if (DebugROM) THEN
-//    WriteLn('ReadHexWord:',Line,':',IntRes);
 
   Result:=IntRes;
 end;
@@ -609,7 +657,7 @@ BEGIN;
     BEGIN;
       {Check for any cas, Raw memory dumps or Snapshots}
       IF ((BType=RTCasAny) AND
-          (Entry.RomType IN [RTCasBin,RTCasBas,RTBinary,RTSnapMMC])) THEN
+          (Entry.RomType IN [RTCasBin,RTCasBas,RTBinary,RTSnapMMC,RTDDMMCBas,RTDDMMCBin])) THEN
         Result:=Entry;
 
       {Check for rom files}
@@ -631,12 +679,56 @@ BEGIN;
   END;
 END;
 
+PROCEDURE TRomList.OutputSortedFile(OutFileName   : STRING);
+
+VAR OutputFile      : TRamothStringList;
+    ConfigSection   : INTEGER;
+    Idx             : INTEGER;
+    SectionList     : TRamothStringList;
+    RomEntry        : TRomEntry;
+
+BEGIN;
+  OutputFile:=TRamothStringList.Create;
+  SectionList:=TRamothStringList.Create;
+  TRY
+    { Find the config section as it is first }
+    FileText.First;
+    FindSection(SecEndConfig);
+    ConfigSection:=FileText.StrIndex;
+
+    FileText.First;
+    FileText.CopyNToList(@OutputFile,ConfigSection+1);
+
+    {Sort the list if not already sorted.... since this happens after the ROM}
+    {has been output, this shouldn't force sorting where not required}
+    IF (NOT MenuSorted) THEN
+      Sort(@RomListCompare);
+
+    FOR Idx:=0 TO (Self.Count-1) DO
+    BEGIN;
+      OutputFile.Add('');
+      RomEntry:=GetBlock(Idx);
+
+      IF (RomEntry<>NIL) THEN
+      BEGIN;
+        OutputFile.AddStrings(RomEntry.ControlSection);
+      END;
+    END;
+    WriteLnFmt('Write Output to : %s',[OutFileName]);
+    OutputFile.SaveToFile(OutFileName);
+  FINALLY
+    OutputFile.Free;
+    SectionList.Free;
+  END;
+END;
+
 CONSTRUCTOR TRomEntry.Create(InTryCompress   : BOOLEAN);
 
 BEGIN;
   INHERITED Create;
   FileNames:=TStringList.Create;
   Patches:=TStringList.Create;
+  ControlSection:=TStringList.Create;
   RomData:=TRamothMemoryStream.Create;
   FCompress:=TRLECompressor.Create;
   BaseAddr:=$0000;
@@ -655,6 +747,7 @@ DESTRUCTOR TRomEntry.Destroy;
 BEGIN;
   FileNames.Free;
   Patches.Free;
+  ControlSection.Free;
   RomData.Free;
   FCompress.Free;
 
@@ -868,7 +961,52 @@ END;
 {**                                                                       **}
 {***************************************************************************}
 FUNCTION TRomEntry.DoLoadDDragonDosDMMC(LocalFileName      : STRING) : BOOLEAN;
+
+VAR DosMMCBin   : TDragonDOSMMCBinFile;
+    Buffer      : TRamothMemoryStream;
+
 BEGIN
+  DosMMCBin:=TDragonDOSMMCBinFile.Create;
+  Buffer:=TRamothMemoryStream.Create;
+
+  TRY
+    DosMMCBin.ReadFromFile(LocalFileName);
+    WITH DosMMCBin DO
+    BEGIN;
+      WriteLnFmt('Type=%02X, Load=%04X, Len=%04X, Exec=%04X',[FileType,LoadAddr,FLen,ExecAddr]);
+
+      IF (Valid) THEN
+      BEGIN;
+        GetFileData(Buffer);
+
+        { If basic, use start, len and exec from header }
+        IF (FileType = DDFTypeBas) THEN
+        BEGIN;
+          FHeadStart:=TRUE;
+          FHeadLen:=TRUE;
+          FHeadExec:=TRUE;
+          Skip:=0;
+        END;
+
+        {Set start,length and exec based on flags}
+        IF (FHeadStart) THEN
+        BEGIN;
+          FStartAddr:=LoadAddr;
+          FLoadAddr:=FStartAddr;
+        END;
+        IF (FHeadExec) THEN FExecAddr:=ExecAddr;
+        IF (FHeadLen) THEN FEndAddr:=StartAddr+Buffer.Size;
+
+        {Copy data From disk file}
+        RomData.Seek(FLoadAddr,soFromBeginning);
+        RomData.CopyBytesFromStream(Buffer,0,Buffer.Size);
+      END;
+      Result:=Valid;
+    END;
+  FINALLY
+    DosMMCBin.Free;
+    Buffer.Free;
+  END;
 END;
 
 {***************************************************************************}
@@ -1037,15 +1175,18 @@ VAR     Split   : TRamothStringList;
 BEGIN;
   Split:=GetParams(Line,TokWrite);
   TRY
-
     IF (Split.Count>0) THEN
-      FStartAddr:=StrToIntDef(Split[0],DefStartAddr);
+      FStartAddr:=StrToIntDef(Split[0],FStartAddr);
 
     IF (Split.Count>1) THEN
-      FEndAddr:=StrToIntDef(Split[1],DefEndAddr)-1;
+    BEGIN;
+      FEndAddr:=StrToIntDef(Split[1],FEndAddr);
+      //IF (FEndAddr > 0) THEN
+      //  FEndAddr:=FEndAddr-1;
+    END;
 
     IF (Split.Count>2) THEN
-      FExecAddr:=StrToIntDef(Split[2],DefExecAddr);
+      FExecAddr:=StrToIntDef(Split[2],FExecAddr);
   FINALLY
     Split.Free;
   END;
@@ -1097,7 +1238,7 @@ VAR Params          : TRamothStringList;
     Idx             : INTEGER;
 
 BEGIN;
-  Params:=GetParams(FileNames.Strings[FileNo],TokWrite);
+  Params:=GetParams(FileNames.Strings[FileNo],TokLoad);
   TRY
     FHeadStart:=FALSE;
     FHeadLen:=FALSE;

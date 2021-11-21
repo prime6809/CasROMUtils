@@ -14,11 +14,13 @@
 ; Detailed documentation of line types.
 ; Line 1 the file contains the type of the entry, valid values are :
 ;	ROM	A standard cartridge rom, with a base address of $C000
-;	CASBIN	A binary cassette image.
-;	CASBASD	A Dragon basic cassette image, will be retokenized if running on a CoCo
-;	CASBASC A CoCo basic cassette image, will be retokenized if running on a Dragon
-;	BINIMG	A raw memory dump from an emulator
-;	MMCSNAP	A DragonMMC format snapshot file.
+;	CASBIN		A binary cassette image.
+;	CASBASD		A Dragon basic cassette image, will be retokenized if running on a CoCo
+;	CASBASC 	A CoCo basic cassette image, will be retokenized if running on a Dragon
+;	BINIMG		A raw memory dump from an emulator
+;	MMCSNAP		A DragonMMC format snapshot file.
+;	DDMMCBAS	A DragonDOS / DragonMMC basic file.
+;	DDMMCBIN	A DragonDOS / DragonMMC binary file.
 ;
 ; Line 2 may contain any valid text (up to 28 characters) that will appear in the 
 ; menu as a title for this item, typically the name of the software.
@@ -98,66 +100,15 @@ EndConfig
 
 BeginRom
 	CASBIN
-	Maurice Minor
-	LOAD g:\emulate\software\Dragon\tape\maurice-fixed.cas,1,HL,HS,EXEC=$66A0
-	STACK $7FFE
+	3D Lunattack
+	LOAD "g:\emulate\software\dragon\tape\3D Lunattack (1984)(Hewson Consultants).cas",1,HL,HE,HS
+	FILL $600,($C00-$600),0
 EndRom
 
 BeginRom
 	CASBIN
-	Shock Trooper
-	LOAD "g:\emulate\software\dragon\tape\shock2.cas",5,LOAD=$1C00
-	LOAD "g:\emulate\software\dragon\tape\shock2.cas",6,LOAD=$1C00
-	WRITE $1C00,$7F00,$1C00
-EndRom
-
-BeginRom
-	CASBIN
-	Ugh!
-	LOAD z:\Retro\Dragon\From Chris Poacher\cas\Softek - Ugh! [exec].cas,1,HL,HS,HE
-EndRom
-	
-BeginRom
-	CASBIN
-	Screaming Abdabs
-	LOAD g:\emulate\software\Dragon\tape\ScreamingAbdabs.cas,1,HL,HS,HE
-EndRom
-
-BeginRom
-	CASBIN
-	Time Bandit
-	LOAD g:\emulate\software\Dragon\tape\exec\time_bandit_exec.cas,1,HL,HS,HE
-EndRom
-
-BeginRom
-	CASBIN
-	Touchstone
-	LOAD g:\emulate\software\Dragon\tape\exec\touchstone_exec.cas,1,HL,HS,HE
-EndRom
-
-BeginRom
-	CASBIN
-	Backtrak
-	LOAD g:\emulate\software\Dragon\tape\exec\bt_exec.cas,1,HL,HS,HE
-	STACK $1200
-EndRom
-
-BeginRom
-	ROM
-	Starship Chameleon
-	LOAD g:\emulate\software\dragon\cart\starship.rom
-EndRom
-
-BeginRom
-	ROM
-	Blockdown
-	LOAD g:\emulate\software\dragon\cart\blockdown.rom
-EndRom
-
-BeginRom
-	CASBIN
-	Blochead
-	LOAD g:\Emulate\software\Dragon\tape\DragonArchive\b\blochead.cas,2,LOAD=$2610,EXEC=$2610,END=$4000
+	3D Seiddab Attack
+	LOAD "g:\emulate\software\dragon\tape\Hewson Consultants - 3D Seiddab Attack.cas",1,HL,HE,HS
 EndRom
 
 BeginRom
@@ -170,28 +121,81 @@ EndRom
 
 BeginRom
 	CASBIN
+	Android Attack
+	LOAD g:\emulate\software\dragon\tape\android.cas,1,HL,HE,HS
+EndRom
+
+BeginRom
+	CASBIN
+	Astro Blast
+	LOAD "g:\emulate\software\dragon\tape\Dragon Data Ltd - Astro Blast.cas",1,HL,HS,HE
+EndRom
+
+BeginRom
+	CASBIN
+	Backtrak
+	LOAD g:\emulate\software\Dragon\tape\exec\bt_exec.cas,1,HL,HS,HE
+	STACK $1200
+EndRom
+
+BeginRom
+	CASBIN
+	Blochead
+	LOAD g:\Emulate\software\Dragon\tape\DragonArchive\b\blochead.cas,2,LOAD=$2610,EXEC=$2610,END=$4000
+EndRom
+
+BeginRom
+	ROM
+	Blockdown
+	LOAD g:\emulate\software\dragon\cart\blockdown.rom
+EndRom
+
+BeginRom
+	CASBIN
 	Bonka
 	LOAD g:\Emulate\software\Dragon\tape\DragonArchive\B\bonka.cas,1,HL,HS,EXEC=$600
 EndRom
 
 BeginRom
+	; Patch capture of reset so that reset returns to cart
 	CASBIN
-	Dungeon Raid
-	LOAD Z:\Retro\Dragon\From Chris Poacher\cas\Microdeal - Dungeon Raid [exec].cas,1,HL,HS,HE
+	Buzzard Bait
+	LOAD "g:\emulate\software\dragon\tape\Microdeal - Buzzard Bait - No Dongle hacked.cas",2,HL,HS,HE
+	PATCH $4F88,$12,$12
 EndRom
 
 BeginRom
 	CASBIN
-	Ninja Warrior
-	LOAD Z:\Retro\Dragon\From Chris Poacher\cas\Programmers Guild - Ninja Warrior.cas,1,HL,HS,HE
+	Buzzing Bertie
+	LOAD "g:\emulate\software\dragon\tape\duncan bryan - buzzing bertie.cas",2,HL,HS,HE
+EndRom
+
+BeginRom
+	ROM
+	Cave Hunter
+	LOAD g:\emulate\software\dragon\cart\DragonData-CaveHunter.rom
 EndRom
 
 BeginRom
 	CASBIN
-	Spacewar
-	LOAD g:\Emulate\software\Dragon\tape\DragonArchive\S\space_wa.cas,1,HL,HS,HE
+	Chuckie Egg
+	LOAD g:\emulate\software\dragon\tape\Chuckie_Egg.cas,1,HS,HE,HL
+	FLAGS NC,NO
 EndRom
 
+BeginRom
+	ROM
+	Cosmic Invaders
+	LOAD g:\emulate\software\dragon\cart\DragonData-CosmicInvaders.rom
+EndRom
+
+BeginRom
+	CASBIN
+	Crazy Painter
+	LOAD "g:\emulate\software\dragon\tape\painter.cas",1,HL,HE,HS
+	PATCH $2607,$12,$12
+	PATCH $4007,$12,$12
+EndRom
 
 BeginRom
 	; Patch capture of reset so that reset returns to cart
@@ -212,35 +216,41 @@ BeginRom
 EndRom
 
 BeginRom
-	; Patch capture of reset so that reset returns to cart
-	CASBIN
-	Lunar Rover Patrol (new)
-	LOAD g:\Emulate\software\Dragon\tape\lunar-rover-patrol-exec.cas,1,HL,HS,HE
-
-	PATCH $2408,$12,$12
+	ROM
+	Cyrus Chess
+	LOAD g:\emulate\software\dragon\cart\DragonData-CyrusChess.rom
 EndRom
-
-BeginRom
-	; Patch capture of reset so that reset returns to cart
-	CASBIN
-	Buzzard Bait
-	LOAD "g:\emulate\software\dragon\tape\Microdeal - Buzzard Bait - No Dongle hacked.cas",2,HL,HS,HE
-	PATCH $4F88,$12,$12
-EndRom
-
 
 BeginRom
 	CASBIN
 	Devil Assault
 	LOAD g:\emulate\software\dragon\tape\devil_as.cas,1,HS,HL,HE
+	FILL $0600,($1E00-$0600),$00
 	FLAGS NC
 EndRom
 
 BeginRom
 	CASBIN
-	Whirlybird Run
-	LOAD g:\emulate\software\dragon\tape\whirlybi.cas,1,HS,HL,HE
-	FLAGS NC
+	Draconian
+	LOAD "g:\emulate\software\dragon\tape\draconian-exec.cas",HE,HL,HS
+EndRom
+
+BeginRom
+	ROM
+	Dragon 32 Demo
+	LOAD g:\emulate\software\dragon\cart\demo.rom
+EndRom
+
+BeginRom
+	ROM
+	Dragon 32 Diagnostic
+	LOAD g:\emulate\software\dragon\cart\diag.rom
+EndRom
+
+BeginRom
+	CASBIN
+	Dungeon Raid
+	LOAD Z:\Retro\Dragon\From Chris Poacher\cas\Microdeal - Dungeon Raid [exec].cas,1,HL,HS,HE
 EndRom
 
 BeginRom
@@ -249,15 +259,7 @@ BeginRom
 	LOAD g:\emulate\software\dragon\tape\frogger.cas,1,HS,HL,HE
 	patch $0317,$12,$12
 	PATCH $4008,$12,$12
-	FLAGS NC
-EndRom
-
-BeginRom
-	CASBIN
-	Phantom Slayer
-	LOAD g:\emulate\software\dragon\tape\phantom_.cas,1,HS,HL,HE
-	PATCH $3DB3,$12,$12
-	PATCH $3DB8,$12,$12
+	FILL $600,($0E00-$0600),0
 	FLAGS NC
 EndRom
 
@@ -269,15 +271,62 @@ EndRom
 
 BeginRom
 	CASBIN
-	Chuckie Egg
-	LOAD g:\emulate\software\dragon\tape\Chuckie_Egg.cas,1,HS,HE,HL
-	FLAGS NC,NO
+	Hunchback
+	LOAD g:\emulate\software\dragon\tape\HUNCHBAC.cas,2,HS
+	WRITE $0600, $7C00, $62C0
+	FILL $2780,($2FFF-$2780),0
+	FILL $3120,($35FF-$3120),0
+	FILL $3600,($4270-$3600),0
+	VIDBASE $0600
+	SAMMODE	$06
+	VDGMODE $00
+EndRom
+
+BeginRom
+; Patch capture of reset so that reset returns to cart
+	CASBIN
+	Jet Boot Colin
+	LOAD "g:\emulate\software\dragon\tape\JET_BOOT_FIXED.CAS",5,load=$1C1D
+	LOAD "g:\emulate\software\dragon\tape\JET_BOOT_FIXED.CAS",6,load=$1C1D
+	
+	WRITE $1c00, $4200, $4100
+	PATCH $4107,$12,$12
+	PATCH $3036,$12,$12
+EndRom
+
+BeginRom
+; The patch line disables the check for a cart, that makes JSW 
+; over-write itself !
+	CASBIN
+	Jet Set Willy
+	LOAD G:\emulate\software\dragon\tape\JSW.cas,1,HL,HS
+	WRITE $02B0, -, $ABA
+	PATCH $2CE0,$39
+	FLAGS NO
 EndRom
 
 BeginRom
 	CASBIN
-	The King
-	LOAD g:\emulate\software\dragon\tape\te_king.cas,2,HS,HE,HL
+	Katerpilla Attack
+	LOAD "g:\emulate\software\dragon\tape\katerpil.cas",HE,HL,HS
+EndRom
+
+BeginRom
+	CASBIN
+	Keys Of The Wizard
+	LOAD "g:\emulate\software\dragon\tape\keywizad-fixed.cas",2,LOAD=$0400
+	PATCH $7003,$12,$12
+	WRITE $0400, $70C6, $7001
+	FLAGS NO
+EndRom
+
+BeginRom
+	; Patch capture of reset so that reset returns to cart
+	CASBIN
+	Lunar Rover Patrol (new)
+	LOAD g:\Emulate\software\Dragon\tape\lunar-rover-patrol-exec.cas,1,HL,HS,HE
+
+	PATCH $2408,$12,$12
 EndRom
 
 BeginRom
@@ -288,45 +337,16 @@ BeginRom
 EndRom
 
 BeginRom
-; The patch line disables the check for a cart, that makes JSW 
-; over-write itself !
 	CASBIN
-	Jet Set Willy
-	LOAD G:\emulate\software\dragon\tape\JSW.cas,1,HL,HS
-	WRITE $02B0, $0, $ABA
-	PATCH $2CE0,$39
-	FLAGS NO
+	Maurice Minor
+	LOAD g:\emulate\software\Dragon\tape\maurice-fixed.cas,1,HL,HS,EXEC=$66A0
+	STACK $7FFE
 EndRom
 
 BeginRom
-; Patch capture of reset so that reset returns to cart
-	CASBIN
-	Skramble
-	LOAD g:\emulate\software\dragon\tape\SKRAMBLE.cas,2,LOAD=$0400
-	WRITE $0400, $39D0, $1000
-	PATCH $1007,$12,$12
-EndRom
-
-BeginRom
-	CASBIN
-	Android Attack
-	LOAD g:\emulate\software\dragon\tape\android.cas,1,HL,HE,HS
-EndRom
-
-BeginRom
-; Patch capture of reset so that reset returns to cart
-	BINIMG
-	Rommel's Revenge
-	LOAD g:\emulate\software\dragon\MemDump\rrdisk.dmp,LOAD=$C00
-	WRITE $0c00, $4E65, $0c00
-;	PATCH $5CAD,$12,$12,$12
-	FLAGS NO
-EndRom
-
-BeginRom
-	CASBIN
-	Astro Blast
-	LOAD "g:\emulate\software\dragon\tape\Dragon Data Ltd - Astro Blast.cas",1,HL,HS,HE
+	ROM
+	Metioroids
+	LOAD g:\emulate\software\dragon\cart\DragonData-Metioroids.rom
 EndRom
 
 BeginRom
@@ -343,18 +363,32 @@ EndRom
 
 BeginRom
 	CASBIN
-	Hunchback
-	LOAD g:\emulate\software\dragon\tape\HUNCHBAC.cas,2,HS
-	WRITE $0600, $7C00, $62C0
-	VIDBASE $0600
-	SAMMODE	$06
-	VDGMODE $00
+	Ninja Warrior
+	LOAD Z:\Retro\Dragon\From Chris Poacher\cas\Programmers Guild - Ninja Warrior.cas,1,HL,HS,HE
 EndRom
 
 BeginRom
-	CASBASD
-	Star Trek
-	LOAD g:\emulate\software\dragon\tape\TREK.cas,1
+	BINIMG
+	Pengion
+	LOAD "g:\emulate\software\dragon\MemDump\pengion.dmp"
+	WRITE $2000,$4500,$42e1
+	PATCH $42C8,$12,$12
+EndRom
+
+BeginRom
+	CASBIN
+	Phantom Slayer
+	LOAD g:\emulate\software\dragon\tape\phantom_.cas,1,HS,HL,HE
+	PATCH $3DB3,$12,$12
+	PATCH $3DB8,$12,$12
+	FLAGS NC
+EndRom
+
+BeginRom
+	CASBIN
+	Planet Invasion
+	"g:\emulate\software\dragon\tape\invasion.cas",1,HL,HE,HS
+	FLAGS NO
 EndRom
 
 BeginRom
@@ -364,7 +398,90 @@ BeginRom
 EndRom
 
 BeginRom
+; Patch capture of reset so that reset returns to cart
+	BINIMG
+	Rommel's Revenge
+	LOAD g:\emulate\software\dragon\MemDump\rrdisk.dmp,LOAD=$C00
+	WRITE $0c00, $4E65, $0c00
+;	PATCH $5CAD,$12,$12,$12
+	FLAGS NO
+EndRom
+
+BeginRom
 	CASBIN
-	3D Lunattack
-	LOAD "g:\emulate\software\dragon\tape\3D Lunattack (1984)(Hewson Consultants).cas",1,HL,HE,HS
+	Scarfman
+	LOAD "g:\emulate\software\dragon\tape\scarfman.cas",1,HL,HS,HE
+EndRom
+
+BeginRom
+	CASBIN
+	Screaming Abdabs
+	LOAD g:\emulate\software\Dragon\tape\ScreamingAbdabs.cas,1,HL,HS,HE
+EndRom
+
+BeginRom
+	CASBIN
+	Shock Trooper
+	LOAD "g:\emulate\software\dragon\tape\shock2.cas",5,LOAD=$1C00
+	LOAD "g:\emulate\software\dragon\tape\shock2.cas",6,LOAD=$1C00
+	WRITE $1C00,$7F00,$1C00
+EndRom
+
+BeginRom
+; Patch capture of reset so that reset returns to cart
+	CASBIN
+	Skramble
+	LOAD g:\emulate\software\dragon\tape\SKRAMBLE.cas,2,LOAD=$0400
+	FILL $600,($0FFF-$600),0
+	WRITE $0400, $39D0, $1000
+	PATCH $1007,$12,$12
+EndRom
+
+BeginRom
+	CASBIN
+	Spacewar
+	LOAD g:\Emulate\software\Dragon\tape\DragonArchive\S\space_wa.cas,1,HL,HS,HE
+EndRom
+
+BeginRom
+	CASBASD
+	Star Trek
+	LOAD g:\emulate\software\dragon\tape\TREK.cas,1
+EndRom
+
+BeginRom
+	ROM
+	Starship Chameleon
+	LOAD g:\emulate\software\dragon\cart\starship.rom
+EndRom
+
+BeginRom
+	CASBIN
+	The King / Donkey King
+	LOAD g:\emulate\software\dragon\tape\te_king.cas,2,HS,HE,HL
+EndRom
+
+BeginRom
+	CASBIN
+	Time Bandit
+	LOAD g:\emulate\software\Dragon\tape\exec\time_bandit_exec.cas,1,HL,HS,HE
+EndRom
+
+BeginRom
+	CASBIN
+	Touchstone
+	LOAD g:\emulate\software\Dragon\tape\exec\touchstone_exec.cas,1,HL,HS,HE
+EndRom
+
+BeginRom
+	CASBIN
+	Ugh!
+	LOAD z:\Retro\Dragon\From Chris Poacher\cas\Softek - Ugh! [exec].cas,1,HL,HS,HE
+EndRom
+
+BeginRom
+	CASBIN
+	Whirlybird Run
+	LOAD g:\emulate\software\dragon\tape\whirlybi.cas,1,HS,HL,HE
+	FLAGS NC
 EndRom

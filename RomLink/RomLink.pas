@@ -26,7 +26,7 @@ program RomLink;
 
 
 USES contnrs,classes,RomList,RamothMemoryStream,SysUtils,Graphics,IntfGraphics,
-     interfaces, RLECompressUnit, CustApp, ConsoleUtils,
+     interfaces, RLECompressUnit, CustApp, ConsoleUtils, DragonDOSMMCBinFileUnit,
      RamothCustomApplicationUnit;
 
 TYPE
@@ -72,18 +72,22 @@ CONST   Major           = 0;
 { Short options }
         OptSVerbose     = 'v';          { Be verbose! }
         OptSHelp        = 'h';          { Get some help }
+        OptSSort        = 's';          { Sort control file, to specified file }
 
 { Long options }
         OptLVerbose     = 'verbose';
         OptLHelp        = 'help';
+        OptLSort        = 'sort';
 
 { Option arrays for CheckOpts }
-        ShortOpts : string = OptSVerbose+ '::' +
-                             OptSHelp+    '::';
+        ShortOpts : string = OptSVerbose+   '::' +
+                             OptSHelp+      '::' +
+                             OptSSort+      ':';
 
-        LongOptsArray : array [1..2] OF AnsiSTRING =
-            (OptLVerbose+ '::',
-             OptLHelp+    '::'
+        LongOptsArray : array [1..3] OF AnsiSTRING =
+            (OptLVerbose+   '::',
+             OptLHelp+      '::',
+             OptSSort+      ':'
             );
 
 PROCEDURE TRomLink.Usage;
@@ -94,6 +98,13 @@ BEGIN;
   WriteLn;
   WriteLn('  RomLink <CtrlFile> <MenuCodeFile> <OutputFile>');
 END;
+{***************************************************************************}
+{**                                                                       **}
+{** Load splashscrren file, either as raw 256x192 bitmap or as a graphics **}
+{** file as supported by TPicture e.g. .bmp, .gif, .png etc.              **}
+{** Graphics file will be converted to the correct format.                **}
+{**                                                                       **}
+{***************************************************************************}
 
 FUNCTION TRomLink.LoadSplashFile(SplashFileName  : STRING;
                                  VAR SplashFile  : TRamothMemoryStream) : BOOLEAN;
@@ -122,13 +133,16 @@ BEGIN;
       BEGIN;
         FOR Xc:=0 TO 255 DO
         BEGIN;
-          IF (Image.Bitmap.Canvas.Pixels[Xc,Yc]<>clBlack) THEN
+           IF (Image.Bitmap.Canvas.Pixels[Xc,Yc]<>clBlack) THEN
             PicByte:=PicByte OR $01;
 
           IF (((Xc+1) MOD 8)=0) THEN
+          BEGIN;
             SplashFile.WriteByte(PicByte);
-
-          PicByte:=PicByte SHL 1;
+            PicByte:=0;
+          END
+          ELSE
+            PicByte:=PicByte SHL 1;
         END;
       END;
       Result:=True;
@@ -238,9 +252,11 @@ BEGIN;
   //BlockNo:=BlockNo+(Entry.RomData.Size DIV RomSize);
   BlockNo:=RomImage.Position DIV RomSize;
 
-  WriteLn(Format('Copied data at pos %2.2d, offset=%4.4X, start=%4.4X,len=%4.4X,entry=%4.4X,%s',
+  WriteLnFmt('Copied data at pos %2.2d, offset=%4.4X, start=%4.4X ,len=%4.4X, entry=%4.4X, size=%d, comp=%d, ratio=%d%%, %s',
                  [Entry.StartBlock,Entry.StartOffset,Entry.StartAddr,
-                  Entry.CodeLength,Entry.ExecAddr,Entry.Text]));
+                  Entry.CodeLength,Entry.ExecAddr,
+                  Entry.RomData.Size,RomStream.Size, ((RomStream.Size * 100) DIV Entry.RomData.Size),
+                  Entry.Text]);
 
 
   CompressedSize:=CompressedSize+RomStream.Size;
@@ -437,6 +453,9 @@ BEGIN;
     ELSE
       WriteLn(Format('ERRROR, Linked rom is bigger than specified rom size of %dK',[MainRomList.RomSizeK]));
 
+    IF (HasOption(OptSSort,OptLSort)) THEN
+      MainRomList.OutputSortedFile(GetOptionValue(OptSSort,OptLSort));
+
   FINALLY
     { Free up variables }
     RomImage.Free;
@@ -463,8 +482,6 @@ BEGIN;
 
   IF (ParamCount<3) THEN
     LogError('Error: Must supply: control file, menu ROM file and output file names');
-
-
 
   {Process if no errors}
   if (Errors.Count=0) then
@@ -511,6 +528,7 @@ begin
   WriteLn;
   WriteLn('The following optional parameters may be specified : ');
   WriteLn(' -h, --help       : Display this help.');
+  WriteLn(' -s, --sort=      : Sort ctrlfile and output to specified file.');
   WriteLn(' -v, --verbose=   : Set verbosity level');
 end;
 

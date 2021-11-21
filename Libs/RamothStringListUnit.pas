@@ -15,8 +15,8 @@ TYPE    PStrings	= ^TStrings;
          		         Params	    : ARRAY OF CONST) : INTEGER;
 
       PROCEDURE First;
-      FUNCTION Current : STRING;
-      FUNCTION Next     : STRING;
+      FUNCTION Current(DoTrim   : BOOLEAN = FALSE) : STRING;
+      FUNCTION Next(DoTrim   : BOOLEAN = FALSE) : STRING;
       FUNCTION NextLine : INTEGER;
       FUNCTION Eof : BOOLEAN;
       PROCEDURE CopyNToList(Dest		: PStrings;
@@ -48,18 +48,21 @@ BEGIN;
   FStrIndex:=0;
 END;
 
-FUNCTION TRamothStringList.Current : STRING;
+FUNCTION TRamothStringList.Current(DoTrim   : BOOLEAN = FALSE) : STRING;
 
 BEGIN;
   Result:='';
   IF (FStrIndex<Count) THEN
     Result:=Strings[FStrIndex];
+
+  IF (DoTrim) THEN
+    Result:=Trim(Result);
 END;
 
-FUNCTION TRamothStringList.Next : STRING;
+FUNCTION TRamothStringList.Next(DoTrim   : BOOLEAN = FALSE) : STRING;
 
 BEGIN;
-  Result:=Current;
+  Result:=Current(DoTrim);
   NextLine;
 END;
 
@@ -82,7 +85,7 @@ BEGIN;
 END;
 
 PROCEDURE TRamothStringList.CopyNToList(Dest		: PStrings;
-  			                NoToCopy	: INTEGER);
+  			                            NoToCopy	: INTEGER);
 
 VAR	Idx	: INTEGER;
 
